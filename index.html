@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>李文杰的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="李文杰的博客">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="李文杰的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="李文杰">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="李文杰的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李文杰的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-管道温度可视化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/25/%E7%AE%A1%E9%81%93%E6%B8%A9%E5%BA%A6%E5%8F%AF%E8%A7%86%E5%8C%96/" class="article-date">
+  <time class="dt-published" datetime="2026-03-25T07:00:00.000Z" itemprop="datePublished">2026-03-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/">数字孪生</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/25/%E7%AE%A1%E9%81%93%E6%B8%A9%E5%BA%A6%E5%8F%AF%E8%A7%86%E5%8C%96/">管道温度可视化项目(一)：C++与VTK的虚实坐标映射</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="🚀-项目背景与功能描述"><a href="#🚀-项目背景与功能描述" class="headerlink" title="🚀 项目背景与功能描述"></a>🚀 项目背景与功能描述</h2><p>目前工业界主要的三维管道建模技术有以下四种：</p>
+<ul>
+<li><strong>① CAD建模：</strong> 通过软件（如 AutoCAD Plant 3D、SolidWorks）完成几何建模。</li>
+<li><strong>② BIM建模：</strong> 不仅包含几何形态，还涵盖材料、尺寸、维护等物理与功能属性，是形成“数字孪生”的基础。</li>
+<li><strong>③ 图形图像建模：</strong> 利用采集到的纹理、轮廓、色彩等信息逆向生成三维模型。</li>
+<li><strong>④ 点云建模：</strong> 通过三维扫描仪获取物体表面点云数据来完成建模。</li>
+</ul>
+<p>管道三维建模不仅仅是几何图形的堆砌，更是物理管道系统与数字化模型的同步。通过传感器获取实时数据，可以在三维空间中进行监控、预测和诊断，极大提升运行效率。</p>
+<p><strong>📌 本项目的核心痛点与解决方案：</strong><br>面对除尘房内复杂的管道布局和层叠现象，传统的数字表格难以直观反映设备的异常过热情况。为此，本项目通过构建管道的三维数字孪生模型，融合测温硬件数据，<strong>动态展示不同区域的连续温度场，实现直观的温度预警。</strong></p>
+<p>在此次方案中，我主要负责攻克两大核心功能：<strong>RFID测温标签温度映射</strong> 与 <strong>红外相机温度映射</strong>。<br>在实际应用中，RFID标签安置在管道上，巡检机器人携带读写器按规划路径读取温度，并传回上位机处理。检测模型如下图所示：</p>
+<p><img src="/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%89%87/RFID%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9E%8B.png" alt="RFID检测模型"></p>
+<p>通过三维热力图，管理人员可以对广泛分布的复杂管道进行“一眼即达”的监察。红外相机捕获的热成像图像如下：</p>
+<p><img src="/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%89%87/%E7%BA%A2%E5%A4%96%E7%9B%B8%E6%9C%BA%E6%8D%95%E8%8E%B7%E5%9B%BE%E5%83%8F.png" alt="红外相机捕获图像"></p>
+<h2 id="（一）管道温度映射："><a href="#（一）管道温度映射：" class="headerlink" title="（一）管道温度映射："></a>（一）管道温度映射：</h2><p>实现管道温度可视化的第一步，是建立“数据”到“颜色”的映射桥梁。这一步我是在 Visual Studio 平台上，基于 C++ 和 VTK (Visualization Toolkit) 引擎来实现的。</p>
+<p>在三维图形学中，一个 STL 管道模型是由成千上万个离散的顶点（Points）组成的。要让管道显示温度，核心思想就是：<strong>给模型的每一个顶点绑定一个温度值（标量），然后利用颜色查找表（Lookup Table）将温度值转换为肉眼可见的 RGB 颜色。</strong></p>
+<h3 id="1-为模型顶点绑定标量数据-Scalars"><a href="#1-为模型顶点绑定标量数据-Scalars" class="headerlink" title="1. 为模型顶点绑定标量数据 (Scalars)"></a>1. 为模型顶点绑定标量数据 (Scalars)</h3><p>首先，我们需要读取 3D 模型，并创建一个浮点型数组，长度与模型的顶点数完全一致。系统初始化时，我将所有顶点的温度默认设置为 20.0℃（室温）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 读取 STL 管道模型</span></span><br><span class="line"><span class="keyword">auto</span> reader = vtkSmartPointer&lt;vtkSTLReader&gt;::<span class="built_in">New</span>();</span><br><span class="line">reader-&gt;<span class="built_in">SetFileName</span>(<span class="string">&quot;D:/model/pipeline_mesh.stl&quot;</span>);</span><br><span class="line">reader-&gt;<span class="built_in">Update</span>();</span><br><span class="line"><span class="keyword">auto</span> polydata = reader-&gt;<span class="built_in">GetOutput</span>();</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> numPoints = polydata-&gt;<span class="built_in">GetNumberOfPoints</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 创建温度标量数组</span></span><br><span class="line"><span class="keyword">auto</span> temperatures = vtkSmartPointer&lt;vtkFloatArray&gt;::<span class="built_in">New</span>();</span><br><span class="line">temperatures-&gt;<span class="built_in">SetName</span>(<span class="string">&quot;Temperature&quot;</span>);</span><br><span class="line">temperatures-&gt;<span class="built_in">SetNumberOfValues</span>(numPoints);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 初始化全局温度为室温 20℃</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">long</span> <span class="type">long</span> i = <span class="number">0</span>; i &lt; numPoints; i++) &#123;</span><br><span class="line">    temperatures-&gt;<span class="built_in">SetValue</span>(i, <span class="number">20.0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 将温度数组绑定到模型的点数据上（极其关键的一步）</span></span><br><span class="line">polydata-&gt;<span class="built_in">GetPointData</span>()-&gt;<span class="built_in">SetScalars</span>(temperatures);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-构建颜色映射表-vtkLookupTable"><a href="#2-构建颜色映射表-vtkLookupTable" class="headerlink" title="2. 构建颜色映射表 (vtkLookupTable)"></a>2. 构建颜色映射表 (vtkLookupTable)</h3><p>有了温度数据后，我们需要定一个规矩：多少度显示什么颜色？<br>这里我引入了 <code>vtkLookupTable</code>，将 20.0℃ ~ 100.0℃ 的温度区间切分成 256 个色阶。为了符合工业场景，低于 30℃ 的区域显示为冷色调（或底漆灰），超过 30℃ 的区域则使用线性插值计算对应的警告色（蓝 -&gt; 红），从而起到强烈的视觉预警作用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> lut = vtkSmartPointer&lt;vtkLookupTable&gt;::<span class="built_in">New</span>();</span><br><span class="line">lut-&gt;<span class="built_in">SetTableRange</span>(<span class="number">20.0</span>, <span class="number">100.0</span>); <span class="comment">// 设置温度映射范围</span></span><br><span class="line">lut-&gt;<span class="built_in">SetNumberOfColors</span>(<span class="number">256</span>);     <span class="comment">// 256级平滑色阶</span></span><br><span class="line">lut-&gt;<span class="built_in">Build</span>();</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> primerGray[<span class="number">3</span>] = &#123; <span class="number">0.70</span>, <span class="number">0.70</span>, <span class="number">0.75</span> &#125;; <span class="comment">// 工业暖灰底色</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历色阶，自定义颜色映射规则</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; lut-&gt;<span class="built_in">GetNumberOfColors</span>(); k++) &#123;</span><br><span class="line">    <span class="type">double</span> factor = (<span class="type">double</span>)k / lut-&gt;<span class="built_in">GetNumberOfColors</span>();</span><br><span class="line">    <span class="type">double</span> temp = <span class="number">20.0</span> + factor * <span class="number">80.0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (temp &lt; <span class="number">30.1</span>) &#123;</span><br><span class="line">        lut-&gt;<span class="built_in">SetTableValue</span>(k, primerGray[<span class="number">0</span>], primerGray[<span class="number">1</span>], primerGray[<span class="number">2</span>], <span class="number">1.0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 伪代码：高危区域转换为警告色</span></span><br><span class="line">        lut-&gt;<span class="built_in">SetTableValue</span>(k, r, g, b, <span class="number">1.0</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-贯通渲染管线-Mapper-Actor"><a href="#3-贯通渲染管线-Mapper-Actor" class="headerlink" title="3. 贯通渲染管线 (Mapper &amp; Actor)"></a>3. 贯通渲染管线 (Mapper &amp; Actor)</h3><p>最后，我们将带有温度数据的模型 (polydata) 和配置好的颜色表 (lut) 交给映射器 (Mapper) 处理，通过 Actor 投射到屏幕上。</p>
+<p>为了验证颜色映射是否生效，我写了一段简单的测试逻辑：遍历所有顶点，以 X 轴坐标为自变量生成渐变温度。 离 X 轴原点越远，温度越高。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试逻辑：沿 X 轴生成渐变温度场</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">long</span> <span class="type">long</span> i = <span class="number">0</span>; i &lt; numPoints; i++) &#123;</span><br><span class="line">    <span class="type">double</span> pos[<span class="number">3</span>];</span><br><span class="line">    polydata-&gt;<span class="built_in">GetPoint</span>(i, pos);</span><br><span class="line">    <span class="comment">// 假设 X 轴坐标每增加10，温度升高1度</span></span><br><span class="line">    <span class="type">double</span> testTemp = <span class="number">20.0</span> + (pos[<span class="number">0</span>] * <span class="number">0.1</span>); </span><br><span class="line">    temperatures-&gt;<span class="built_in">SetValue</span>(i, testTemp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> mapper = vtkSmartPointer&lt;vtkPolyDataMapper&gt;::<span class="built_in">New</span>();</span><br><span class="line">mapper-&gt;<span class="built_in">SetInputData</span>(polydata);</span><br><span class="line">mapper-&gt;<span class="built_in">SetLookupTable</span>(lut);         </span><br><span class="line">mapper-&gt;<span class="built_in">SetScalarRange</span>(<span class="number">20.0</span>, <span class="number">100.0</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> actor = vtkSmartPointer&lt;vtkActor&gt;::<span class="built_in">New</span>();</span><br><span class="line">actor-&gt;<span class="built_in">SetMapper</span>(mapper);</span><br></pre></td></tr></table></figure>
+<p>打通整条 VTK 渲染管线后，终于得到了管道温度的静态映射效果（如下图）。可以看到，温度场如预期般沿着 X 轴呈现出完美的冷暖渐变分布：<br><img src="/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%89%87/%E7%AE%A1%E9%81%93%E6%B8%A9%E5%BA%A6%E6%98%A0%E5%B0%84.png" alt="管道温度映射图像"></p>
+<h3 id="4-工程化体验提升：交互式拾取器-Picker"><a href="#4-工程化体验提升：交互式拾取器-Picker" class="headerlink" title="4. 工程化体验提升：交互式拾取器 (Picker)"></a>4. 工程化体验提升：交互式拾取器 (Picker)</h3><p>为了更好的视觉效果，我在模型右侧添加了温度色带 (ScalarBar)，在左下角添加了 XYZ 三维坐标轴。</p>
+<p>更重要的是，为了方便后期调试和运维人员巡检，我引入了 VTK 拾取器 (Picker)，实现了一套鼠标悬停探针功能。当鼠标指向具体管壁时，UI 会实时弹出该空间点位的 ID 编号与精准温度信息。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义回调类：处理鼠标移动事件，显示物理坐标与温度</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MouseProbeCallback</span> : <span class="keyword">public</span> vtkCommand</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> MouseProbeCallback* <span class="title">New</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> MouseProbeCallback; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 各种必须的成员指针（Picker, Renderer, TextActor）略...</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Execute</span><span class="params">(vtkObject* caller, <span class="type">unsigned</span> <span class="type">long</span>, <span class="type">void</span>*)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vtkRenderWindowInteractor* interactor = <span class="built_in">reinterpret_cast</span>&lt;vtkRenderWindowInteractor*&gt;(caller);</span><br><span class="line">        <span class="type">int</span> x = interactor-&gt;<span class="built_in">GetEventPosition</span>()[<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> y = interactor-&gt;<span class="built_in">GetEventPosition</span>()[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行拾取 (射线投射检测)</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;Picker-&gt;<span class="built_in">Pick</span>(x, y, <span class="number">0</span>, <span class="keyword">this</span>-&gt;Renderer);</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> pointId = <span class="keyword">this</span>-&gt;Picker-&gt;<span class="built_in">GetPointId</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pointId != <span class="number">-1</span>) &#123; <span class="comment">// 鼠标命中模型</span></span><br><span class="line">            vtkDataSet* data = <span class="keyword">this</span>-&gt;Picker-&gt;<span class="built_in">GetDataSet</span>();</span><br><span class="line">            <span class="type">double</span> temp = data-&gt;<span class="built_in">GetPointData</span>()-&gt;<span class="built_in">GetScalars</span>()-&gt;<span class="built_in">GetTuple1</span>(pointId);</span><br><span class="line"></span><br><span class="line">            <span class="type">char</span> msg[<span class="number">128</span>];</span><br><span class="line">            <span class="built_in">sprintf_s</span>(msg, <span class="string">&quot;Point ID: %lld\nTemp: %.2f C&quot;</span>, pointId, temp);</span><br><span class="line">            <span class="keyword">this</span>-&gt;TextActor-&gt;<span class="built_in">SetInput</span>(msg);</span><br><span class="line">            <span class="keyword">this</span>-&gt;TextActor-&gt;<span class="built_in">SetVisibility</span>(<span class="number">1</span>); </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;TextActor-&gt;<span class="built_in">SetVisibility</span>(<span class="number">0</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        interactor-&gt;<span class="built_in">GetRenderWindow</span>()-&gt;<span class="built_in">Render</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+<p>并在主函数中绑定监听器：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建基于点拾取的高精度 Picker</span></span><br><span class="line"><span class="keyword">auto</span> picker = vtkSmartPointer&lt;vtkPointPicker&gt;::<span class="built_in">New</span>();</span><br><span class="line">picker-&gt;<span class="built_in">SetTolerance</span>(<span class="number">0.005</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> myCallback = vtkSmartPointer&lt;MouseProbeCallback&gt;::<span class="built_in">New</span>();</span><br><span class="line"><span class="comment">// ... 将组件注入回调实例 ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 挂载鼠标移动监听事件</span></span><br><span class="line">interactor-&gt;<span class="built_in">AddObserver</span>(vtkCommand::MouseMoveEvent, myCallback);</span><br></pre></td></tr></table></figure>
+<h2 id="至此，本项目的“基础设施”已经全部搭建完毕。我们拥有了-3D-管道模型、可配置的工业级预警色带，以及精准的鼠标探针。"><a href="#至此，本项目的“基础设施”已经全部搭建完毕。我们拥有了-3D-管道模型、可配置的工业级预警色带，以及精准的鼠标探针。" class="headerlink" title="至此，本项目的“基础设施”已经全部搭建完毕。我们拥有了 3D 管道模型、可配置的工业级预警色带，以及精准的鼠标探针。"></a>至此，本项目的“基础设施”已经全部搭建完毕。我们拥有了 3D 管道模型、可配置的工业级预警色带，以及精准的鼠标探针。</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/25/%E7%AE%A1%E9%81%93%E6%B8%A9%E5%BA%A6%E5%8F%AF%E8%A7%86%E5%8C%96/" data-id="cuidAi7bUo2C8_EuwP19SMw-y" data-title="管道温度可视化项目(一)：C++与VTK的虚实坐标映射" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VTK/" rel="tag">VTK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/" rel="tag">数字孪生</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/">数字孪生</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VTK/" rel="tag">VTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/" rel="tag">数字孪生</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Modbus/" style="font-size: 10px;">Modbus</a> <a href="/tags/VTK/" style="font-size: 10px;">VTK</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/" style="font-size: 10px;">数字孪生</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/03/25/%E7%AE%A1%E9%81%93%E6%B8%A9%E5%BA%A6%E5%8F%AF%E8%A7%86%E5%8C%96/">管道温度可视化项目(一)：C++与VTK的虚实坐标映射</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 李文杰<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
