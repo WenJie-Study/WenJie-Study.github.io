@@ -19,23 +19,32 @@
   <meta name="author" content="李文杰">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="嵌入式学习笔记（一）：C语言核心指针与底层寻址">
+    <meta name="description" content="首先我们需要知道真题题目https:&#x2F;&#x2F;www.lanqiao.cn&#x2F;courses&#x2F;2786&#x2F;learning&#x2F;?id&#x3D;4220710&amp;compatibility&#x3D;false这是蓝桥杯真题官网，在里面找到16届嵌入式省赛，我们先看硬件配置  我们可以知道，整体的功能实现由G431作为主控芯片，接收两路模拟信号输入，PA15作为脉冲信号输入捕获，PA7输出可控PWM波，还有包括LCD，LE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式学习笔记（一）：16届蓝桥杯省赛真题学习">
 <meta property="og:url" content="http://example.com/2026/03/25/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="李文杰的博客">
+<meta property="og:description" content="首先我们需要知道真题题目https:&#x2F;&#x2F;www.lanqiao.cn&#x2F;courses&#x2F;2786&#x2F;learning&#x2F;?id&#x3D;4220710&amp;compatibility&#x3D;false这是蓝桥杯真题官网，在里面找到16届嵌入式省赛，我们先看硬件配置  我们可以知道，整体的功能实现由G431作为主控芯片，接收两路模拟信号输入，PA15作为脉冲信号输入捕获，PA7输出可控PWM波，还有包括LCD，LE">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E5%BC%95%E8%84%9A%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/lcd%E8%BF%9B%E5%B7%A5%E7%A8%8B.png">
+<meta property="og:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/lcd1.jpg">
+<meta property="og:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E6%8C%89%E9%94%AE2%E5%8A%9F%E8%83%BD.png">
+<meta property="og:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E5%8D%A0%E7%A9%BA%E6%AF%94%E8%B0%83%E8%8A%82%E7%AD%96%E7%95%A5.png">
 <meta property="article:published_time" content="2026-03-25T13:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-25T12:20:50.896Z">
+<meta property="article:modified_time" content="2026-03-29T14:06:32.084Z">
 <meta property="article:author" content="李文杰">
 <meta property="article:tag" content="C语言">
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="底层开发">
 <meta property="article:tag" content="蓝桥杯">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE.png">
   
   
   
-  <title>嵌入式学习笔记（一）：C语言核心指针与底层寻址 - 李文杰的博客</title>
+  <title>嵌入式学习笔记（一）：16届蓝桥杯省赛真题学习 - 李文杰的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -330,7 +339,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="嵌入式学习笔记（一）：C语言核心指针与底层寻址"></span>
+            <span id="subtitle" data-typed-text="嵌入式学习笔记（一）：16届蓝桥杯省赛真题学习"></span>
           
         </div>
 
@@ -353,7 +362,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          12k 字
         
       </span>
     
@@ -364,7 +373,7 @@
         
         
         
-          1 分钟
+          99 分钟
         
       </span>
     
@@ -403,12 +412,123 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">嵌入式学习笔记（一）：C语言核心指针与底层寻址</h1>
+            <h1 id="seo-header">嵌入式学习笔记（一）：16届蓝桥杯省赛真题学习</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <p>首先我们需要知道真题题目<br><a target="_blank" rel="noopener" href="https://www.lanqiao.cn/courses/2786/learning/?id=4220710&compatibility=false">https://www.lanqiao.cn/courses/2786/learning/?id=4220710&amp;compatibility=false</a><br>这是蓝桥杯真题官网，在里面找到16届嵌入式省赛，我们先看硬件配置</p>
+<p><img src="/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE.png" srcset="/img/loading.gif" lazyload alt="硬件配置"></p>
+<p>我们可以知道，整体的功能实现由G431作为主控芯片，接收两路模拟信号输入，PA15作为脉冲信号输入捕获，PA7输出可控PWM波，<br>还有包括LCD，LED灯和按键。<br>知道了总体结构和模块，那么我们就要对每个模块进行一个引脚分配，由官方提供的开发板硬件原理图我们可以发现，板子上挂载的8个<br>LED灯是由PC8<del>PC15来控制，4个按键是由PB0</del>PB2和PA0来控制，模拟信号由电位器触发，题目中要求我们使用R37，R38作为两路<br>模拟信号触发源，然后PA15作为脉冲信号输入捕获，PA7输出可控PWM波，LCD部分由官方提供的程序文件自动配置。<br>引脚分配好之后，就可以去到我们的CubeMX里面给每个部分进行一个初始化配置，如图</p>
+<p><img src="/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E5%BC%95%E8%84%9A%E9%85%8D%E7%BD%AE.png" srcset="/img/loading.gif" lazyload alt="硬件配置"></p>
+<p>配置好后，直接生成代码，软件会根据CubeMX里的配置自动生成初始化函数。<br>代码生成好后，我们先来编写最基础的LED和按键控制代码，首先是LED控制，因为官方板子的LED口和LCD口是接通的，所以每次改变<br>LED时我们需要通过PD2的锁存器来控制，不然当你改变LED的时候可能会导致LCD出现异常。</p>
+<p>&#x2F;&#x2F;led灯控制<br>void Led_Disp(uint8_t dsLed)<br>{<br>	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_All,GPIO_PIN_SET);&#x2F;&#x2F;每次调用将PC口全部置为高电平，LED灯全灭<br>	HAL_GPIO_WritePin(GPIOC,dsLed&lt;&lt;8,GPIO_PIN_RESET);&#x2F;&#x2F;在PC的16位IO口中，板子上的灯挂载在高八位，采用左移八位来控制<br>	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_SET);&#x2F;&#x2F;PD2为锁存器，每次控制LED后应该打开锁存器，让控制生效<br>	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);&#x2F;&#x2F;生效完毕后关闭锁存器<br>}</p>
+<p>这样，我们通过调用Led_Disp函数就可以实现对LED灯的控制，函数括号内填入16进制数，通过低八位来控制，每一位代表一个LED灯。<br>然后是按键扫描函数，我们通过状态机的形式实现，告别使用HAL_Delay这种阻塞性的语句，避免CPU卡死的情况出现。<br>接下来就是按键扫描函数的构建，按键扫描函数采用状态机的思想，用一个变量Key_State来表示目前状态，</p>
+<p> &#x2F;&#x2F;键盘扫描状态机<br>uint8_t Key_Scan(void)<br>{<br>	static uint8_t Key_State&#x3D;0;&#x2F;&#x2F;状态0，等待按键按下<br>	uint8_t Key_Return&#x3D;0;&#x2F;&#x2F;按键返回值，返回真实的案件编号<br>	uint8_t Key_Press&#x3D;0;&#x2F;&#x2F;用于判断是否有按键按下，临时判断按键编号<br>	<br>	if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_0)&#x3D;&#x3D;0)<br>		Key_Press&#x3D;1;<br>	else if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_1)&#x3D;&#x3D;0)<br>		Key_Press&#x3D;2;<br>	else if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_2)&#x3D;&#x3D;0)<br>		Key_Press&#x3D;3;<br>	else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)&#x3D;&#x3D;0)<br>		Key_Press&#x3D;4;<br>	<br>	switch(Key_State)<br>	{<br>		case 0:<br>			if(Key_Press!&#x3D;0)&#x2F;&#x2F;有键按下，准备进入状态1进行消抖<br>				Key_State&#x3D;1;<br>			break;<br>		case 1:<br>			if(Key_Press!&#x3D;0)&#x2F;&#x2F;依然按下，表示不是抖动，按键编号赋值给Key_Return<br>			{<br>				Key_Return&#x3D;Key_Press;<br>				Key_State&#x3D;2;<br>			}<br>			else<br>				Key_State&#x3D;0;<br>			break;<br>		case 2:<br>			if(Key_Press&#x3D;&#x3D;0)&#x2F;&#x2F;状态2，等待按键松开，进行下一轮按键判断<br>				Key_State&#x3D;0;<br>			break;<br>	}		<br>	return Key_Return;<br>}</p>
+<p>到这一步，我们就完成了LED和按键控制的模块，为了检验一下功能，我们可以在主函数中调用这两个函数模块，<br>实现按键控制LED灯的操作</p>
+<p>main<br>{<br>while（1）<br>{<br>		&#x2F;&#x2F;按键任务10ms进行一次<br>		if(HAL_GetTick()-Key_tick&gt;&#x3D;10)<br>		{<br>			Key_tick&#x3D;HAL_GetTick();<br>			Key_Vol&#x3D;Key_Scan();<br>			<br>			switch(Key_Vol)<br>			{<br>				case 1:<br>					Led_Disp(0x01);<br>				break;<br>				case 2:<br>					Led_Disp(0x02);<br>				break;<br>				case 3:<br>					Led_Disp(0x04);<br>				break;<br>				case 4:<br>					Led_Disp(0x08);<br>				break;<br>			}<br>		}<br>}<br>}<br>烧录程序，按下按键相应LED灯亮其余灯灭，但无法控制熄灭，没关系，功能成功实现就可以，<br>接下来，我们加入LCD模块，将官方所提供的lcd.c，lcd.h和fonts.h文件放入src和inc文件夹中，在keil的左侧工程栏将<br>lcd.c添加到你的工程中(不要忘了在头文件中声明一下)，如图</p>
+<p><img src="/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/lcd%E8%BF%9B%E5%B7%A5%E7%A8%8B.png" srcset="/img/loading.gif" lazyload alt="lcd文件放置"></p>
+<p>然后就可以在程序中调用lcd函数来实现屏幕显示的功能，然后根据题目要求，我们将屏幕进行初始化，<br>        LCD_Init();<br>	LCD_Clear(Black);&#x2F;&#x2F;先把屏幕涂成黑色<br>	LCD_SetBackColor(Black);&#x2F;&#x2F;背景色设置为黑色<br>	LCD_SetTextColor(White);&#x2F;&#x2F;文字颜色设置为白色<br>之后我们可以调用lcd函数打印一行文字来验证lcd是否正常工作，</p>
+<p>LCD_DisplayStringLine(Line4,(uint8_t*)”     lcd ready!     “);&#x2F;&#x2F;在屏幕第四行的位置显示</p>
+<p><img src="/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/lcd1.jpg" srcset="/img/loading.gif" lazyload alt="lcd"></p>
+<p>成功显示，那么接下来准备实现ADC模拟输入功能，打开CubeMX，选择PB12（ADC1_IN11）和PB15(ADC2_IN15)作为<br>模拟信号采集通道,配置为单端输入，生成代码，然后我们来编写ADC模块的程序，ADC的工作流程是：启动ADC—&gt;等待<br>ADC转换完成—&gt;读取数据寄存器—&gt;电压换算，于是程序就是：<br>double ADC(ADC_HandleTypeDef* adc)<br>{<br>	uint32_t adc_val&#x3D;0;<br>	HAL_ADC_Start(adc);<br>	HAL_ADC_PollForConversion(adc,10);<br>	adc_val&#x3D;HAL_ADC_GetValue(adc);<br>	return adc_val*3.3&#x2F;4095.0;<br>}<br>这里可以使用LCD屏幕打印出测得的模拟量，但我这里跳过。<br>之后来编写LCD的三个界面，分别是监控界面，统计界面和参数界面，我定义一个全局变量ui_page来控制页面的切换，0代表监控<br>界面，1代表统计界面，2代表参数界面，界面上需要显示许多参数，定义全局变量来表示，初始值题中已给出，注意头文件要额外<br>包含#include “stdio.h”有了这个头文件我们才能使用sprintf函数将字符串打印到数组里面。</p>
+<p>uint16_t CF&#x3D;0;&#x2F;&#x2F;PWM频率<br>uint8_t CD&#x3D;0;&#x2F;&#x2F;占空比<br>uint8_t DF&#x3D;0;&#x2F;&#x2F;捕获信号频率<br>uint16_t XF&#x3D;0;<br>uint8_t DS&#x3D;1;&#x2F;&#x2F;占空比步长<br>uint8_t DR&#x3D;80;&#x2F;&#x2F;占空比范围<br>uint16_t FS&#x3D;100;&#x2F;&#x2F;频率步长<br>uint16_t FR&#x3D;2000;&#x2F;&#x2F;频率范围<br>uint8_t Hour&#x3D;0;&#x2F;&#x2F;时<br>uint8_t Minute&#x3D;0;&#x2F;&#x2F;分<br>uint8_t Second&#x3D;0;&#x2F;&#x2F;秒<br>char lcd_buf[25];</p>
+<p>void LCD_Display_Process(void)<br>{<br>    if (ui_page &#x3D;&#x3D; 0) &#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 监控界面 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>    {<br>        LCD_DisplayStringLine(Line2, (uint8_t *)”        PWM        “);</p>
+<pre><code class="hljs">    sprintf(lcd_buf, &quot;      CF=%dHz       &quot;, CF);
+    LCD_DisplayStringLine(Line4, (uint8_t *)lcd_buf);
+    
+    sprintf(lcd_buf, &quot;      CD=%d%%       &quot;, CD);
+    LCD_DisplayStringLine(Line5, (uint8_t *)lcd_buf);
+		
+		sprintf(lcd_buf,   &quot;      DF=%dHz       &quot;, DF);
+    LCD_DisplayStringLine(Line6, (uint8_t *)lcd_buf);
+		
+		if(is_locked==0)
+		{
+			sprintf(lcd_buf,   &quot;      ST=UNLOCK       &quot;);
+    LCD_DisplayStringLine(Line7, (uint8_t *)lcd_buf);
+		}
+		else
+		{
+			sprintf(lcd_buf,   &quot;      ST=LOCK       &quot;);
+    LCD_DisplayStringLine(Line7, (uint8_t *)lcd_buf);
+		}
+		
+		sprintf(lcd_buf,   &quot;      %dH%dM%dS     &quot;, Hour,Minute,Second);
+    LCD_DisplayStringLine(Line8, (uint8_t *)lcd_buf);
+}
+else if (ui_page == 1) // ============ 统计界面 ============
+{
+    LCD_DisplayStringLine(Line2, (uint8_t *)&quot;        RECD        &quot;);
+    
+    sprintf(lcd_buf, &quot;      CF=%dHz       &quot;, CF);
+    LCD_DisplayStringLine(Line4, (uint8_t *)lcd_buf);
+    
+    sprintf(lcd_buf, &quot;      CD=%d%%       &quot;, CD);
+    LCD_DisplayStringLine(Line5, (uint8_t *)lcd_buf);
+		
+		sprintf(lcd_buf,   &quot;      DF=%dHz       &quot;, DF);
+    LCD_DisplayStringLine(Line6, (uint8_t *)lcd_buf);
+		
+		sprintf(lcd_buf,   &quot;      XF=%dHz       &quot;, XF);
+    LCD_DisplayStringLine(Line7, (uint8_t *)lcd_buf);
+		
+		sprintf(lcd_buf,   &quot;      %dH%dM%dS     &quot;, Hour,Minute,Second);
+    LCD_DisplayStringLine(Line8, (uint8_t *)lcd_buf);
+}
+else if (ui_page == 2) // ============ 参数界面 ============
+{
+    LCD_DisplayStringLine(Line2, (uint8_t *)&quot;        PARA         &quot;);
+    
+    sprintf(lcd_buf, &quot;      DS=%d%%       &quot;, DS);
+    LCD_DisplayStringLine(Line4, (uint8_t *)lcd_buf);
+    
+    sprintf(lcd_buf, &quot;      DR=%d%%       &quot;, DR);
+    LCD_DisplayStringLine(Line5, (uint8_t *)lcd_buf);
+		
+		sprintf(lcd_buf,   &quot;      FS=%dHz       &quot;, FS);
+    LCD_DisplayStringLine(Line6, (uint8_t *)lcd_buf);
+		
+		sprintf(lcd_buf,   &quot;      FR=%dHz       &quot;, FR);
+    LCD_DisplayStringLine(Line7, (uint8_t *)lcd_buf);
+}
+</code></pre>
+<p>}<br>然后我们修改主函数中的按键控制程序，按键1按下不再是点亮LED灯，改成切换界面，<br>case 1:<br>ui_page++;<br>if(ui_page&gt;2)ui_page&#x3D;0;<br>break;<br>切换页面程序完成了，但是按下按键为什么没有切换页面呢？虽然写好了LCD三个界面的程序，但是别忘了在主函数<br>中调用，所以我们还需要在主函数中写一个屏幕刷新程序，<br>&#x2F;&#x2F;屏幕刷新100ms一次<br>		static uint32_t Lcd_tick&#x3D;0;<br>			if(HAL_GetTick()-Lcd_tick&gt;&#x3D;100)<br>			{<br>				Lcd_tick&#x3D;HAL_GetTick();<br>				LCD_Display_Process();<br>			}<br>现在，烧录程序，按下按键1，我们就可以非常丝滑地切换界面了。<br>接下来，由于按键的框架我们已经搭好了，我们顺势完成其他按键的功能，先看按键2，</p>
+<p><img src="/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E6%8C%89%E9%94%AE2%E5%8A%9F%E8%83%BD.png" srcset="/img/loading.gif" lazyload alt="按键2功能"></p>
+<p>按键2需要我们在参数界面下，也就是ui_page&#x3D;2时可以切换选择的参数，那我们就像控制界面切换一样，定义一个全局<br>变量B2_Contral来控制它，</p>
+<p>uint8_t B2_Contral&#x3D;0;</p>
+<p>然后我们在main函数中找到按键2的控制程序，删除原来的控制led灯的程序，写入新的控制程序，</p>
+<p>case 2:&#x2F;&#x2F;因为只有在参数界面才执行切换参数操作，所以使用if作为判断界面是否为参数界面<br>					if(ui_page&#x3D;&#x3D;2)<br>					{<br>						B2_Contral++;<br>						if(B2_Contral&gt;3)B2_Contral&#x3D;0;<br>					}<br>				break;</p>
+<p>现在切换参数有了，那么控制参数呢，题目中控制参数增减分别是用按键3和按键4来实现的，</p>
+<p>case 3:<br>					if(ui_page&#x3D;&#x3D;2)<br>					{<br>						switch(B2_Contral)<br>						{<br>							case 0:<br>								DS+&#x3D;1;<br>							break;<br>							case 1:<br>								DR+&#x3D;10;<br>							break;<br>							case 2:<br>								FS+&#x3D;100;<br>							break;<br>							case 3:<br>								FR+&#x3D;1000;<br>							break;<br>						}<br>					}<br>				break;<br>按键4与按键3逻辑一致，直接照着按键3来写，只要把’+’换成’-‘就行，</p>
+<p>case 4:<br>					if(ui_page&#x3D;&#x3D;2)<br>					{<br>						switch(B2_Contral)<br>						{<br>							case 0:<br>								DS-&#x3D;1;<br>							break;<br>							case 1:<br>								DR-&#x3D;10;<br>							break;<br>							case 2:<br>								FS-&#x3D;100;<br>							break;<br>							case 3:<br>								FR-&#x3D;1000;<br>							break;<br>						}<br>					}<br>				break;<br>写好程序后烧录进开发板，按两下按键1到参数界面，按下按键3，可以观察到DS变量增加，按下按键4减少，按键2可以<br>切换参数。<br>现在，看我们的屏幕，屏幕的最下方是不是有一个时分秒的计时显示？现在它还不会变化，一直是0H0M0S，现在我们<br>来编写一个计时程序，让它能够实现真正的计时功能，<br>	&#x2F;&#x2F;计时任务<br>	static uint32_t now_tick&#x3D;0;<br>	if(HAL_GetTick()-now_tick&gt;&#x3D;1000)<br>	{<br>		now_tick&#x3D;HAL_GetTick();<br>		Second++;<br>		if(Second&gt;&#x3D;60)<br>		{<br>			Minute++;<br>			Second&#x3D;0;<br>		}<br>		if(Minute&gt;&#x3D;60)<br>		{<br>			Hour++;<br>			Minute&#x3D;0;<br>		}<br>	}<br>这个程序实现了每秒Second加一，每60秒Minute加一，每60分钟Hour加一，没有对Hour进行限制，理论上经过256个<br>小时后会溢出，但在蓝桥杯中一般不需要跑这么久。<br>接下来我们来看按键2的第二个功能，短按触发锁定与解耦状态，长按使系统计时重置，长按不触发短按，这里我在使用<br>板子的时候发现，板子在参数界面显示了静态的系统计时，我发现题目中参数界面是不需要系统计时这一个显示的，看了<br>一下程序发现，原来是少了将屏幕清屏这一个步骤，那我们在每次切换页面的时候加上清屏这个功能，</p>
+<p>case 1:<br>					ui_page++;<br>				if(ui_page&gt;2)ui_page&#x3D;0;<br>				LCD_Clear(Black );&#x2F;&#x2F;在这加上清屏<br>				break;<br>现在屏幕显示正常了，我们继续来看按键2的功能，首先是锁定与解耦功能，我们可以定义一个全局变量lock来控制，</p>
+<p>uint8_t is_locked&#x3D;0;&#x2F;&#x2F;0表示解锁，1表示锁定</p>
+<p>功能上来讲，需要与PA7输出的PWM波进行联系，锁定状态下频率，占空比保持不变，与两路模拟信号无关，这里就先搁置。<br>那么来看长短按的功能，对于长短按，我们可以在按键任务里面判断，按键任务是每10ms执行一次，那么只要在里面判断<br>按键2一直按下的时间超过了20此进入按键任务的时间就执行长按功能，否则就执行短按功能，那么，我们可以定义全局变量<br>key_2vol来读取此时按键2所在io引脚的输入电平，每次执行按键任务判断一次，如果是高电平（按键2按下），使num加一，<br>num大于20就表示长按，小于20就是短按，将其写在按键任务里面，10ms执行一次</p>
+<p>uint8_t key_2vol&#x3D;0;<br>uint8_t num&#x3D;0;</p>
+<p>&#x2F;&#x2F;按键任务10ms进行一次<br>		if(HAL_GetTick()-Key_tick&gt;&#x3D;10)<br>		{<br>			Key_tick+&#x3D;10;<br>			Key_Vol&#x3D;Key_Scan();<br>			<br>			key_2vol&#x3D;HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_1);<br>			if(key_2vol&#x3D;&#x3D;0)<br>			{<br>				num++;<br>			}else if(key_2vol&#x3D;&#x3D;1)<br>			{<br>				if(num&gt;&#x3D;200)<br>				{<br>					Second&#x3D;0;<br>					Minute&#x3D;0;<br>					Hour&#x3D;0;<br>					<br>				}else if(num&gt;1&amp;&amp;num&lt;200)&#x2F;&#x2F;利用num大于1进行消抖<br>				{<br>					if(ui_page&#x3D;&#x3D;0)<br>						is_locked^&#x3D;1;<br>				}<br>				num&#x3D;0;<br>			}</p>
+<p>&#x2F;&#x2F;下面是之前的按键任务<br>……..}</p>
+<p>结果出现了一些问题，我长按两秒并没有触发时间重置，但是短按可以改变锁定状态，于是我将num打印<br>到屏幕上，<br>else if(key_2vol&#x3D;&#x3D;1)<br>			{<br>				if(num&gt;&#x3D;200)<br>				{<br>					Second&#x3D;0;<br>					Minute&#x3D;0;<br>					Hour&#x3D;0;<br>					<br>				}else if(num&gt;1&amp;&amp;num&lt;200)&#x2F;&#x2F;利用num大于1进行消抖<br>				{<br>					if(ui_page&#x3D;&#x3D;0)<br>						is_locked^&#x3D;1;<br>				}<br>				num&#x3D;0;<br>			}</p>
+<p>&#x2F;&#x2F;将打印语句放在了这里<br>	sprintf(lcd_buf,   “      num&#x3D;%d       “, num);&#x2F;&#x2F;将num打印在屏幕上显示<br>        LCD_DisplayStringLine(Line1, (uint8_t *)lcd_buf);</p>
+<p>烧录程序测试后我发现，按下按键num一直在增长，逻辑上没有问题，问题在于num加到200所用时间大于2s，这表明<br>我的程序没有按照我设定的时间来运行，于是询问AI求解，原来是某些程序的运行会消耗很多时间，这就导致了我设定<br>的按键任务不再是10ms执行一次，它执行一次的时间比10ms要长，还有将num打印到屏幕上的函数，<br>printf(lcd_buf,   “      num&#x3D;%d       “, num);&#x2F;&#x2F;将num打印在屏幕上显示<br>        LCD_DisplayStringLine(Line1, (uint8_t *)lcd_buf);<br>这两行语句也很消耗时间，那怎么解决呢，<br>首先将这两行语句放入LCD屏幕刷新任务里面，<br>&#x2F;&#x2F;屏幕刷新100ms一次<br>		static uint32_t Lcd_tick&#x3D;0;<br>			if(HAL_GetTick()-Lcd_tick&gt;&#x3D;100)<br>			{<br>				Lcd_tick&#x3D;HAL_GetTick();<br>				LCD_Display_Process();<br>				sprintf(lcd_buf,   “      num&#x3D;%d       “, num);<br>        LCD_DisplayStringLine(Line1, (uint8_t *)lcd_buf);<br>			}<br>然后，为了保证我们每个任务都能严格按照设定时间执行，我们需要对原本的时间安排进行修改，<br>将Lcd_tick&#x3D;HAL_GetTick()改为Lcd_tick+&#x3D;100，这样就能够保证屏幕刷新是100ms执行一次，当然其他任务也是如此，<br>按键任务改为Key_tick+&#x3D;10，诸如此类。<br>我们再一次烧录程序，检验发现，现在num从0加到200的时间正好是2s，那么长短按功能就实现了，可以注释掉屏幕上<br>多余的显示<br>&#x2F;&#x2F;sprintf(lcd_buf,   “      num&#x3D;%d       “, num);<br>   &#x2F;&#x2F;     LCD_DisplayStringLine(Line1, (uint8_t *)lcd_buf);</p>
+<p>接下来我们要来实现PWM模块，按题中给的硬件图来看，我们需要用PA7来输出一个PWM波，这个PWM波的占空比和<br>频率与ADC的两路模拟信号R37和R38有关，根据题目信息，由占空比调节策略可得</p>
+<p><img src="/16%E8%93%9D%E6%A1%A5%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9C%81%E8%B5%9B%E5%AD%A6%E4%B9%A0/%E5%8D%A0%E7%A9%BA%E6%AF%94%E8%B0%83%E8%8A%82%E7%AD%96%E7%95%A5.png" srcset="/img/loading.gif" lazyload alt="占空比调节策略"></p>
+<p>共有n+1个台阶，步长DS&#x3D;(DR-10)&#x2F;N,那么N&#x3D;(DR-10)&#x2F;DS,台阶宽度Va&#x3D;3.3&#x2F;(N+1),那么我们可以得到此刻上了多少<br>台阶Current_step&#x3D;(int)((a_vol)&#x2F;3.3),用int实现向下取整，此时的占空比就为CD&#x3D;DS<em>Current_step+10，占空比最低<br>是10且为固定值。<br>然后回到我们的CubeMX，PA7选择TIM3_CH2作为PWM输出，预分频设置为80-1，自动重装载寄存器设置为1000-1，<br>生成代码到keil，编写PWM函数，<br>void PWM(void)<br>{<br>	uint8_t N&#x3D;(DR-10)&#x2F;DS;<br>	double Va&#x3D;3.3&#x2F;(N+1);<br>	uint8_t Current_Step&#x3D;(int)(a_vol&#x2F;Va);<br>	CD&#x3D;DS</em>Current_Step+10;<br>	<br>	__HAL_TIM_SetCompare(&amp;htim3,TIM_CHANNEL_2, CD * 10);<br>}<br>在主函数while中调用，烧录可以看到当我们拧动R37旋钮，占空比CD会有相应变化，在参数界面修改步长DS和最大值<br>DR，再拧R37，占空比变化步长和最大值也发生改变，功能成功实现。<br>到这里，我有一个疑问，如果我和其他任务一样，每50ms或者100ms调用一次PWM函数，那么产生出的PWM会断续吗，<br>事实上并不会，因为在你没有调用的49ms内，TIM会自动每1ms输出一次PWM，所以完全可以和其他任务一样，让他每<br>50ms执行一次，<br>	&#x2F;&#x2F;生成PWM<br>	static uint32_t PWM_tick&#x3D;0;<br>	if(HAL_GetTick()-PWM_tick&gt;&#x3D;50)<br>	{<br>		PWM_tick+&#x3D;50;<br>		PWM();<br>	}<br>	<br>同时在这里我发现了一个问题，就是当我的R37旋钮拧到最大值时，我的CD只能到达79，经查阅发现，原来是ADC<br>每次使用前都需要对其进行一次校准，校准由硬件自动完成，我们只需要在程序中调用校准程序，<br>HAL_ADCEx_Calibration_Start(&amp;hadc1, ADC_SINGLE_ENDED);<br>  HAL_ADCEx_Calibration_Start(&amp;hadc2, ADC_SINGLE_ENDED);<br>同时我们也加上越界保护，防止拧到地超过最大值，将这个程序加在PWM函数中<br>if(Current_Step&gt;N)Current_Step&#x3D;N;</p>
+<p>这个防越界程序可以配合引入工程裕量，就是把我们的最高电压3.3当成一个小一点的数比如3.1，这样做可以让我们<br>避免因为物理因素而使得电位器无法输出3.3V的最大值而出现的问题。<br>然后频率的调节策略和占空比类似，将程序写在计算占空比的程序后面即可，</p>
+<p>uint8_t n&#x3D;(FR-1000)&#x2F;FS;<br>	float Vb&#x3D;3.3&#x2F;(n+1);<br>	uint8_t step&#x3D;(int)(b_vol&#x2F;Vb);<br>	if(step&gt;n)step&#x3D;n;<br>	CF&#x3D;1000+step*FS;<br>	<br>	 uint32_t target_arr &#x3D; (1000000 &#x2F; CF) - 1;<br>    uint32_t target_ccr &#x3D; (target_arr + 1) * CD &#x2F; 100;</p>
+<pre><code class="hljs">__HAL_TIM_SET_AUTORELOAD(&amp;htim3, target_arr); 
+__HAL_TIM_SetCompare(&amp;htim3, TIM_CHANNEL_2, target_ccr);
+</code></pre>
+<p>这里关于计算arr和ccr可能有点难理解，我们可以换个角度，系统主频经过预分频器后进入TIM定时器的频率是1MHZ，<br>那我们可以列出1&#x2F;(1&#x2F;1MHZ)&#x3D;(arr+1)&#x2F;(1&#x2F;CF),计数器每秒计数量是一定的，arr寄存器在1&#x2F;CF的时间内计数了arr+1次，<br>于是可得arr&#x3D; (1000000 &#x2F; CF) - 1,之后我们根据CCR的值等于PWM周期<em>占空比</em>计数速度，那么可列出式子<br>CCR&#x3D;（1&#x2F;CF）<em>(CD&#x2F;100)<em>1&#x2F;(1&#x2F;1MHZ)其中1&#x2F;(1&#x2F;1MHZ)&#x3D;(arr+1)&#x2F;(1&#x2F;CF)，所以可等同于<br>CCR&#x3D;（1&#x2F;CF）</em>(CD&#x2F;100)</em>(arr+1)&#x2F;(1&#x2F;CF)。</p>
+<p>至此，PWM输出功能也成功实现。<br>在这里，我又发现了一个问题，我拧动R37旋钮后不动，我的CD一直在抖动，这是因为物理噪声的原因，那么怎么消除<br>这个噪声呢？我们在ADC的读取任务里面加入一阶滤波程序，实现软件滤波，原理是把“上一次的旧电压”和<br>“这一次的新电压”按比例混合一下，旧的占大头，新的占小头。</p>
+<p>&#x2F;&#x2F; ADC读取，50ms进行一次<br>		if(HAL_GetTick() - ADC_tick &gt;&#x3D; 50)<br>		{<br>			ADC_tick +&#x3D; 50;<br>			<br>            &#x2F;&#x2F; 1. 先把测到的新数据存到一个临时变量里<br>			float new_a &#x3D; Get_ADC_Vol(&amp;hadc2);<br>			float new_b &#x3D; Get_ADC_Vol(&amp;hadc1);</p>
+<pre><code class="hljs">        // 新数据只占 20% 权重，老数据占 80% 权重
+        a_vol = (a_vol * 0.8f) + (new_a * 0.2f);
+        b_vol = (b_vol * 0.8f) + (new_b * 0.2f);
+	}
+</code></pre>
+<p>这样，我们的CD就不会再抖动了。<br>那么接下来就是最后一个模块，输入脉冲捕获功能，配置</p>
+
                 
               </div>
             
@@ -459,7 +579,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>嵌入式学习笔记（一）：C语言核心指针与底层寻址</div>
+      <div>嵌入式学习笔记（一）：16届蓝桥杯省赛真题学习</div>
       <div>http://example.com/2026/03/25/嵌入式学习/</div>
     </div>
     <div class="license-meta">
